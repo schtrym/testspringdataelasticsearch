@@ -8,6 +8,6 @@ import springdataelastisearch.entity.Book;
 
 public interface BookRepository extends CrudRepository<Book, String> {
 	
-	List<Book> findByEditor(String editor);
+	List<Book> findByEditorLike(String editor);
 	
 }

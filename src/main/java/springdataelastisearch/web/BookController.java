@@ -27,7 +27,7 @@ public class BookController {
 			repository.findAll().forEach(b -> books.add(b));
 		}
 		else {
-			repository.findByEditor(editor).forEach(b -> books.add(b));
+			repository.findByEditorLike(editor).forEach(b -> books.add(b));
 		}
 		return books;
 	}
