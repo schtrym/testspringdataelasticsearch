@@ -26,6 +26,12 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 			.withTypes("book")
 			.addAggregation(AggregationBuilders.terms("byEditor").field("editor"))
 			.addAggregation(AggregationBuilders.terms("bySerie").field("serie"))
+			.addAggregation(AggregationBuilders.range("byPriceRange").field("price")
+					.addUnboundedTo(10)
+					.addRange(10, 15)
+					.addRange(15, 20)
+					.addRange(20, 25)
+					.addUnboundedFrom(20))
 			.build();
 		Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>() {
 			@Override

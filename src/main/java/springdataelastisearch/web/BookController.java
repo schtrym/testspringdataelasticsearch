@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.elasticsearch.search.aggregations.Aggregations;
-import org.elasticsearch.search.aggregations.bucket.terms.Terms;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -43,6 +42,6 @@ public class BookController {
 	@RequestMapping(value = "aggs", method = RequestMethod.GET)
 	public @ResponseBody List<AggregationDTO> listAggregations() {
 		Aggregations retrieveAggregations = repository.retrieveAggregations("tintin");
-		return retrieveAggregations.asMap().values().stream().map(a -> aggregationDTOMapper.toDTO((Terms)a)).collect(Collectors.toList());
+		return retrieveAggregations.asMap().values().stream().map(a -> aggregationDTOMapper.toDTO(a)).collect(Collectors.toList());
 	}
 }
