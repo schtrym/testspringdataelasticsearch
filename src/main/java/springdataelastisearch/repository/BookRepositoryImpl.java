@@ -23,7 +23,10 @@ public class BookRepositoryImpl implements BookRepositoryCustom {
 		SearchQuery searchQuery = new NativeSearchQueryBuilder()
 			.withQuery(matchAllQuery())
 			.withIndices("books")
-			.withTypes("book").addAggregation(AggregationBuilders.terms("byEditor").field("editor").showTermDocCountError(false)).build();
+			.withTypes("book")
+			.addAggregation(AggregationBuilders.terms("byEditor").field("editor"))
+			.addAggregation(AggregationBuilders.terms("bySerie").field("serie"))
+			.build();
 		Aggregations aggregations = elasticsearchTemplate.query(searchQuery, new ResultsExtractor<Aggregations>() {
 			@Override
 			public Aggregations extract(SearchResponse response) {
