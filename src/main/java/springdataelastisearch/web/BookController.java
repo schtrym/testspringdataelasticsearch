@@ -28,13 +28,16 @@ public class BookController {
 	private AggregationDTOMapper aggregationDTOMapper;
 	
 	@RequestMapping(method = RequestMethod.GET)
-	public @ResponseBody List<Book> listBooks(@RequestParam(required = false, value="editor") String editor) {
+	public @ResponseBody List<Book> listBooks(@RequestParam(required = false, value="editor") String editor, @RequestParam(required = false, value="title") String title) {
 		List<Book> books = new ArrayList<Book>();
-		if (editor == null) {
+		if (editor == null && title == null) {
 			repository.findAll().forEach(b -> books.add(b));
 		}
-		else {
-			repository.findByEditorLike(editor).forEach(b -> books.add(b));
+		else if (editor != null){
+			repository.findByEditeur(editor).forEach(b -> books.add(b));
+		}
+		else if (title != null) {
+			repository.findByTitre(title).forEach(b -> books.add(b));
 		}
 		return books;
 	}
