@@ -7,6 +7,7 @@ import java.util.stream.Collectors;
 import org.elasticsearch.search.aggregations.Aggregations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -16,6 +17,7 @@ import springdataelastisearch.entity.AggregationDTO;
 import springdataelastisearch.entity.Book;
 import springdataelastisearch.entity.mapper.AggregationDTOMapper;
 import springdataelastisearch.repository.elasticsearch.BookRepository;
+import springdataelastisearch.repository.mongo.BookMongoRepository;
 
 @Controller
 @RequestMapping("/books")
@@ -23,6 +25,9 @@ public class BookController {
 	
 	@Autowired
 	private BookRepository repository;
+	
+	@Autowired
+	private BookMongoRepository mongoRepository;
 	
 	@Autowired
 	private AggregationDTOMapper aggregationDTOMapper;
@@ -40,6 +45,12 @@ public class BookController {
 			repository.findByTitre(title).forEach(b -> books.add(b));
 		}
 		return books;
+	}
+	
+	@RequestMapping(method = RequestMethod.POST)
+	public @ResponseBody void createBook(@RequestBody Book book) {
+		System.err.println("Create a book");
+		mongoRepository.save(book);
 	}
 	
 	@RequestMapping(value = "aggs", method = RequestMethod.GET)

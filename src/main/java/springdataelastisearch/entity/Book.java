@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.elasticsearch.annotations.Document;
 
 @Document(indexName = "go4book", type = "book")
+@org.springframework.data.mongodb.core.mapping.Document(collection="book")
 public class Book implements Serializable {
 
 	private static final long serialVersionUID = -5905452954145464861L;
