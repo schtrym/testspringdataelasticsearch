@@ -1,4 +1,4 @@
-package springdataelastisearch.repository;
+package springdataelastisearch.repository.elasticsearch;
 
 import static org.elasticsearch.index.query.QueryBuilders.matchAllQuery;
 

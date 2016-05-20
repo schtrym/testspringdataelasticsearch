@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import springdataelastisearch.entity.AggregationDTO;
 import springdataelastisearch.entity.Book;
 import springdataelastisearch.entity.mapper.AggregationDTOMapper;
-import springdataelastisearch.repository.BookRepository;
+import springdataelastisearch.repository.elasticsearch.BookRepository;
 
 @Controller
 @RequestMapping("/books")

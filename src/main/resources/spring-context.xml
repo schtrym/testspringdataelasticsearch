@@ -2,16 +2,30 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 xmlns:elasticsearch="http://www.springframework.org/schema/data/elasticsearch"
+xmlns:mongo="http://www.springframework.org/schema/data/mongo"
 xsi:schemaLocation="http://www.springframework.org/schema/beans
 http://www.springframework.org/schema/beans/spring-beans.xsd
 http://www.springframework.org/schema/data/elasticsearch
-http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd">
+http://www.springframework.org/schema/data/elasticsearch/spring-elasticsearch.xsd
+http://www.springframework.org/schema/data/mongo 
+http://www.springframework.org/schema/data/mongo/spring-mongo.xsd">
 
-    <elasticsearch:repositories base-package="springdataelastisearch.repository" />
+    <elasticsearch:repositories base-package="springdataelastisearch.repository.elasticsearch" />
     
     <elasticsearch:transport-client id="client" cluster-nodes="localhost:9300" cluster-name="stede-cluster"/>
 
    <bean name="elasticsearchTemplate" class="org.springframework.data.elasticsearch.core.ElasticsearchTemplate">
         <constructor-arg name="client" ref="client"/>
     </bean>
+
+
+    <mongo:repositories base-package="springdataelastisearch.repository.mongo" />
+    
+    <mongo:mongo host="localhost" port="27017"/>
+
+	<bean id="mongoTemplate" class="org.springframework.data.mongodb.core.MongoTemplate">
+		<constructor-arg ref="mongo" />
+		<constructor-arg name="databaseName" value="go4book" />
+	</bean>
+
 </beans>

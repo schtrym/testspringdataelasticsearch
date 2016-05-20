@@ -1,4 +1,4 @@
-package springdataelastisearch.repository;
+package springdataelastisearch.repository.elasticsearch;
 
 import org.elasticsearch.search.aggregations.Aggregations;
 
